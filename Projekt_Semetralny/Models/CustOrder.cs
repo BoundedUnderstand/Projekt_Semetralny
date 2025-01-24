@@ -11,6 +11,6 @@ public class CustOrder
     public Customer Customer { get; set; }
     public ShippingMethod ShippingMethod { get; set; }
     public Address DestinationAddress { get; set; }
-    public ICollection<OrderLine> OrderLines { get; set; }
-    public ICollection<OrderHistory> OrderHistories { get; set; }
+    public ICollection<OrderLine> OrderLines { get; set; } // Powiązanie z OrderLine
+    public IEnumerable<OrderHistory>? OrderHistories { get; set; }
 }

@@ -1,11 +1,9 @@
-using System.Collections.Generic;
+namespace Projekt_Semetralny.Models;
 
-namespace GravityBookstore.Models
+public class Author
 {
-    public class Author
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<Book> Books { get; set; }
-    }
+    public int AuthorId { get; set; } // Klucz główny
+    public string AuthorName { get; set; } // Nazwa autora
+
+    public ICollection<BookAuthor> BookAuthors { get; set; } // Relacja z BookAuthor
 }

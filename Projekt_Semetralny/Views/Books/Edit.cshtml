@@ -1,8 +1,25 @@
-@model TModel
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Projekt_Semetralny.Models.Book
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
-
-<h2>title</h2>
+<h2>Edytuj książkę</h2>
+<form asp-action="Edit">
+    <input type="hidden" asp-for="BookId" />
+    <div class="form-group">
+        <label for="Title">Tytuł</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="ISBN13">ISBN</label>
+        <input asp-for="ISBN13" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="NumPages">Liczba stron</label>
+        <input asp-for="NumPages" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="PublicationDate">Data publikacji</label>
+        <input asp-for="PublicationDate" class="form-control" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+</form>

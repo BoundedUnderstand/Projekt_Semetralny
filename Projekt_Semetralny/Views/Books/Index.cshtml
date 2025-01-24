@@ -1,12 +1,6 @@
-@model IEnumerable<GravityBookstore.Models.Book>
+@model IEnumerable<Book>
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
-
-<h1>Lista książek</h1>
-<a href="Create" class="btn btn-primary">Dodaj książkę</a>
+<h2>Lista książek</h2>
 <table class="table">
     <thead>
     <tr>
@@ -14,7 +8,7 @@
         <th>ISBN</th>
         <th>Liczba stron</th>
         <th>Data publikacji</th>
-        <th>Liczba sprzedanych egzemplarzy</th>
+        <th>Autorzy</th>
     </tr>
     </thead>
     <tbody>
@@ -22,11 +16,19 @@
     {
         <tr>
             <td>@book.Title</td>
-            <td>@book.Isbn13</td>
+            <td>@book.ISBN13</td>
             <td>@book.NumPages</td>
-            <td>@book.PublicationDate.ToShortDateString()</td>
-            <td>@book.SoldCopies</td>
+            <td>@book.PublicationDate.ToString("d")</td>
+            <td>
+                <ul>
+                    @foreach (var author in book.BookAuthors.Select(ba => ba.Author))
+                    {
+                        <li>@author.AuthorName</li>
+                    }
+                </ul>
+            </td>
         </tr>
     }
     </tbody>
 </table>
+<a asp-action="Create" class="btn btn-primary">Dodaj książkę</a>

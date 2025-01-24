@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt Semetralny", "Projekt Semetralny\Projekt Semetralny.csproj", "{0AE2BB9F-27E7-474D-8AE3-EEEE4BA5DB7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt_Semetralny", "Projekt_Semetralny\Projekt_Semetralny.csproj", "{0AE2BB9F-27E7-474D-8AE3-EEEE4BA5DB7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

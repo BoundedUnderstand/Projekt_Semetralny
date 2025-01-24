@@ -10,11 +10,40 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Addresses\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Addresses\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Addresses\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Addresses\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Addresses\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Customers\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Customers\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Customers\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Customers\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Customers\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Countries\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Countries\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Countries\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Countries\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Countries\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ShippingMethods\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ShippingMethods\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ShippingMethods\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ShippingMethods\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ShippingMethods\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\OrderStatus\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\OrderStatus\Index.cshtml" />
     </ItemGroup>
 
 </Project>

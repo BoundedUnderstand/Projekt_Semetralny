@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
+namespace Projekt_Semetralny.Models;
 
-namespace GravityBookstore.Models
+public class Book
 {
-    public class Book
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Isbn13 { get; set; }
-        public int NumPages { get; set; }
-        public DateTime PublicationDate { get; set; }
-        public int SoldCopies { get; set; }
-        public ICollection<Author> Authors { get; set; }
-    }
+    public int BookId { get; set; } // Klucz główny
+    public string Title { get; set; }
+    public string ISBN13 { get; set; }
+    public int LanguageId { get; set; }
+    public int NumPages { get; set; } // Liczba stron
+    public DateTime PublicationDate { get; set; } // Data publikacji
+    public int PublisherId { get; set; }
+
+    public BookLanguage Language { get; set; }
+    public Publisher Publisher { get; set; }
+    public ICollection<BookAuthor> BookAuthors { get; set; }
+    public ICollection<OrderLine> OrderLines { get; set; }
 }

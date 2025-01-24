@@ -1,40 +1,141 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using GravityBookstore.Models;
-using Projekt_Semetralny;
+using Microsoft.EntityFrameworkCore;
+using Projekt_Semetralny.Models;
 
-namespace GravityBookstore.Controllers
+namespace Projekt_Semetralny.Controllers;
+
+public class BooksController(ApplicationDbContext context) : Controller
 {
-    public class BooksController : Controller
+    // GET: Books
+    public async Task<IActionResult> Index()
     {
-        private readonly ApplicationDbContext _context;
+        var books = await context.Books
+            .Include(b => b.BookAuthors)
+            .ThenInclude(ba => ba.Author)
+            .ToListAsync();
 
-        public BooksController(ApplicationDbContext context)
+        return View(books);
+    }
+
+    // GET: Books/Details/5
+    public async Task<IActionResult> Details(int id)
+    {
+        var book = await context.Books
+            .Include(b => b.BookAuthors)
+            .ThenInclude(ba => ba.Author)
+            .FirstOrDefaultAsync(b => b.BookId == id);
+
+        if (book == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        public IActionResult Index()
+        return View(book);
+    }
+
+    // GET: Books/Create
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: Books/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("BookId,Title,ISBN13,LanguageId,NumPages,PublicationDate,PublisherId")] Book book)
+    {
+        if (ModelState.IsValid)
         {
-            var books = _context.Books.ToList();
-            return View(books);
+            context.Add(book);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(book);
+    }
+
+    private IActionResult View(Book viewName)
+    {
+        throw new NotImplementedException();
+    }
+
+    // GET: Books/Edit/5
+    public async Task<IActionResult> Edit(int id)
+    {
+        var book = await context.Books.FindAsync(id);
+
+        if (book == null)
+        {
+            return NotFound();
         }
 
-        public IActionResult Create()
+        return View(book);
+    }
+
+    // POST: Books/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,ISBN13,LanguageId,NumPages,PublicationDate,PublisherId")] Book book)
+    {
+        if (id != book.BookId)
         {
-            return View();
+            return NotFound();
         }
 
-        [HttpPost]
-        public IActionResult Create(Book book)
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Books.Add(book);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                context.Update(book);
+                await context.SaveChangesAsync();
             }
-            return View(book);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BookExists(book.BookId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
+        return View(book);
+    }
+
+    // GET: Books/Delete/5
+    public async Task<IActionResult> Delete(int id)
+    {
+        var book = await context.Books
+            .FirstOrDefaultAsync(b => b.BookId == id);
+
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        return View(book);
+    }
+
+    // POST: Books/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var book = await context.Books.FindAsync(id);
+
+        if (book != null)
+        {
+            context.Books.Remove(book);
+            await context.SaveChangesAsync();
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    private bool BookExists(int id)
+    {
+        return context.Books.Any(e => e.BookId == id);
     }
 }

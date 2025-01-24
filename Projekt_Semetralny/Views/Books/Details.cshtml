@@ -1,8 +1,42 @@
-@model TModel
+@model Book
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
+<h2>Szczegóły książki</h2>
 
-<h2>title</h2>
+<div>
+    <h4>Książka</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Tytuł</dt>
+        <dd class="col-sm-10">@Model.Title</dd>
+
+        <dt class="col-sm-2">ISBN</dt>
+        <dd class="col-sm-10">@Model.ISBN13</dd>
+
+        <dt class="col-sm-2">Liczba stron</dt>
+        <dd class="col-sm-10">@Model.NumPages</dd>
+
+        <dt class="col-sm-2">Data publikacji</dt>
+        <dd class="col-sm-10">@Model.PublicationDate.ToString("d")</dd>
+
+        <dt class="col-sm-2">Język</dt>
+        <dd class="col-sm-10">@Model.Language?.LanguageName</dd>
+
+        <dt class="col-sm-2">Wydawca</dt>
+        <dd class="col-sm-10">@Model.Publisher?.PublisherName</dd>
+
+        <dt class="col-sm-2">Autorzy</dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var author in Model.BookAuthors.Select(ba => ba.Author))
+                {
+                    <li>@author.AuthorName</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BookId" class="btn btn-primary">Edytuj</a>
+    <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+</div>

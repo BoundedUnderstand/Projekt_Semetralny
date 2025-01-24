@@ -1,8 +1,28 @@
-@model TModel
+@model IEnumerable<Author>
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
-
-<h2>title</h2>
+<h2>Lista autorów</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Imię i nazwisko</th>
+        <th>Książki</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var author in Model)
+    {
+        <tr>
+            <td>@author.AuthorName</td>
+            <td>
+                <ul>
+                    @foreach (var book in author.BookAuthors.Select(ba => ba.Book))
+                    {
+                        <li>@book.Title</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<a asp-action="Create" class="btn btn-primary">Dodaj autora</a>
