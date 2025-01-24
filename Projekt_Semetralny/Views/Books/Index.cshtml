@@ -1,0 +1,32 @@
+@model IEnumerable<GravityBookstore.Models.Book>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1>Lista książek</h1>
+<a href="Create" class="btn btn-primary">Dodaj książkę</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Tytuł</th>
+        <th>ISBN</th>
+        <th>Liczba stron</th>
+        <th>Data publikacji</th>
+        <th>Liczba sprzedanych egzemplarzy</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Title</td>
+            <td>@book.Isbn13</td>
+            <td>@book.NumPages</td>
+            <td>@book.PublicationDate.ToShortDateString()</td>
+            <td>@book.SoldCopies</td>
+        </tr>
+    }
+    </tbody>
+</table>
